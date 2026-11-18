@@ -1,0 +1,53 @@
+# Exercise 2 - Cache Hierarchy Simulation
+
+This directory contains the second Advanced Computer Architecture exercise. The work focuses on memory hierarchy simulation with Intel PIN and SPEC CPU2006 benchmark inputs.
+
+## Contents
+
+- [Assignment references](assignment/README.md) identify the external course statement and any assigned reading.
+- [advcomparch-ex2-helpcode](advcomparch-ex2-helpcode/README.md) documents the retained build integration and exact locally supplied inputs.
+- `scripts/`: automation scripts for running and summarizing experiments.
+- `benchmarks/`: generated raw outputs, logs, CSV summaries, and diagrams.
+- `report/`: final report source and compiled output.
+- `decisions.md`: implementation and evaluation decisions kept while working through the assignment.
+- `theory.md`: compact theory notes used to keep the report explanations consistent.
+
+## Workflow
+
+Restore the [authorized source bases and companion inputs](../../EXTERNAL_INPUTS.md) in a disposable working copy. From its repository root, build the simulator pintool with an explicit PIN installation:
+
+```bash
+make -C exercises/2nd/advcomparch-ex2-helpcode/pintool PIN_ROOT=/path/to/pin
+```
+
+Run the section 4.2 L2-cache sweep from the repository root:
+
+```bash
+./exercises/2nd/scripts/run_4_2_l2_sweep.py
+```
+
+The runner uses `taskset` worker processes pinned to cores `0-7` by default, writes raw outputs and logs under `exercises/2nd/benchmarks/4.2/`, and emits progress as each benchmark/configuration finishes.
+
+After section 4.2 finishes and writes `summary_by_config.csv`, run the section 4.3 replacement-policy study from the repository root:
+
+```bash
+./exercises/2nd/scripts/run_4_3_replacement_policies.py
+```
+
+The 4.3 runner selects the best 4.2 L2 configuration for each capacity by aggregate IPC, then runs LRU, MRU, Random, LFU, LIP, and SRRIP on the same seven benchmarks. It writes raw outputs and summaries under `exercises/2nd/benchmarks/4.3/`.
+
+Generate report diagrams after the summaries exist:
+
+```bash
+python3 exercises/2nd/benchmarks/diagrams/make_diagrams.py
+```
+
+## Results and Report
+
+Section summaries live under `benchmarks/4.2/` and `benchmarks/4.3/`.
+Report-ready diagrams are stored in `benchmarks/diagrams/`, and the final
+LaTeX source/PDF is stored in `report/`.
+
+## Runtime and evidence limits
+
+Use `--pin` and `--pintool` for local tool paths, `--cores` for allowed host CPUs, and a separate `--output-root` for new measurements. Section 4.3 also reads the Section 4.2 selection summary; inspect its summary-path option before a rerun. `--dry-run` prints intended commands without executing the simulation. Cache miss counts and IPC are outputs of the configured model, not hardware-counter measurements. Authorized SPEC inputs, including any required LFS payloads, must be present; see the [root guide](../../README.md).

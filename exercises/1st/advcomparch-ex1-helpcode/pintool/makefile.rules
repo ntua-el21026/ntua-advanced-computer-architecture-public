@@ -1,0 +1,2 @@
+TEST_TOOL_ROOTS := cslab_branch_stats cslab_branch
+SANITY_SUBSET := $(TEST_TOOL_ROOTS) $(TEST_ROOTS)

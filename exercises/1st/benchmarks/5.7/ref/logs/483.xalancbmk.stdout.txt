@@ -1,0 +1,5 @@
+Academic benchmark record
+Workload: 483.xalancbmk
+Input class: ref
+Recorded counters and settings: exercises/1st/benchmarks/5.7/summary.csv
+The retained summary contains the matching benchmark rows. The serialized transformation output is supplied only by a separate run with authorized inputs.

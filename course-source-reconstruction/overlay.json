@@ -1,0 +1,5442 @@
+[
+  {
+    "path": "exercises/1st/advcomparch-ex1-helpcode/pintool/branch_predictor.h",
+    "base_path": "exercises/1st/advcomparch-ex1-helpcode/pintool/branch_predictor.h",
+    "base_source": "CSLab exercise 1 starter as recorded in initial import 8160b46",
+    "base_sha256": "7dc008132b32b0400f2f76abc24a317fd8d518dc3f9315bcc5550d9709676213",
+    "reconstructed_sha256": "aed16a9e653e19d6dee5a0727b40fb8b9a98a7df268d265f6d4849d979e2847c",
+    "segments": [
+      {
+        "copy": [
+          0,
+          6
+        ]
+      },
+      {
+        "student_lines": [
+          "#include <cassert> // assert()\n",
+          "#include <string>\n",
+          "#include <vector>\n"
+        ]
+      },
+      {
+        "copy": [
+          6,
+          40
+        ]
+      },
+      {
+        "student_lines": [
+          "static unsigned int predictorCounterMax(unsigned int counter_bits) {\n",
+          "    return (1u << counter_bits) - 1u;\n",
+          "}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "static bool predictorCounterTaken(unsigned int counter, unsigned int counter_bits) {\n",
+          "    return counter >= (1u << (counter_bits - 1));\n",
+          "}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "static void predictorUpdateCounter(unsigned int &counter, unsigned int counter_max, bool actual) {\n",
+          "    if (actual) {\n",
+          "        if (counter < counter_max)\n",
+          "            counter++;\n",
+          "    } else {\n",
+          "        if (counter > 0)\n",
+          "            counter--;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "student_lines": [
+          "}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "static unsigned int predictorPcIndex(ADDRINT ip, unsigned int entries) {\n",
+          "    return (ip >> 2) % entries;\n",
+          "}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class StaticAlwaysTakenPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    StaticAlwaysTakenPredictor() : BranchPredictor() {}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        return true;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "student_lines": [
+          "        return \"Static-AlwaysTaken\";\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class StaticBTFNTPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    StaticBTFNTPredictor() : BranchPredictor() {}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        return target < ip;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "student_lines": [
+          "        return \"Static-BTFNT\";\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          40,
+          51
+        ]
+      },
+      {
+        "student_lines": [
+          "    ~NbitPredictor() { delete[] TABLE; };\n"
+        ]
+      },
+      {
+        "copy": [
+          52,
+          88
+        ]
+      },
+      {
+        "student_lines": [
+          "class LocalHistoryTwoLevelPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    LocalHistoryTwoLevelPredictor(unsigned int bht_entries_, unsigned int history_bits_,\n",
+          "                                  unsigned int pht_entries_, unsigned int counter_bits_)\n",
+          "        : BranchPredictor(),\n",
+          "          bht_entries(bht_entries_),\n",
+          "          history_bits(history_bits_),\n",
+          "          pht_entries(pht_entries_),\n",
+          "          counter_bits(counter_bits_),\n",
+          "          history_mask((1u << history_bits_) - 1u),\n",
+          "          counter_max(predictorCounterMax(counter_bits_)),\n",
+          "          bht(bht_entries_, 0),\n",
+          "          pht(pht_entries_, 0) {\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int bht_index = predictorPcIndex(ip, bht_entries);\n",
+          "        unsigned int pht_index = phtIndex(ip, bht[bht_index]);\n",
+          "        return predictorCounterTaken(pht[pht_index], counter_bits);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int bht_index = predictorPcIndex(ip, bht_entries);\n",
+          "        unsigned int old_history = bht[bht_index];\n",
+          "        unsigned int pht_index = phtIndex(ip, old_history);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int counter = pht[pht_index];\n",
+          "        predictorUpdateCounter(counter, counter_max, actual);\n",
+          "        pht[pht_index] = counter;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        bht[bht_index] = ((old_history << 1) | (actual ? 1u : 0u)) & history_mask;\n"
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "copy": [
+          74,
+          75
+        ]
+      },
+      {
+        "student_lines": [
+          "        stream << \"Local-X\" << bht_entries << \"-Z\" << history_bits\n",
+          "               << \"-PHT\" << (pht_entries / 1024) << \"K-\" << counter_bits;\n"
+        ]
+      },
+      {
+        "copy": [
+          76,
+          77
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int phtIndex(ADDRINT ip, unsigned int history) {\n",
+          "        return (predictorPcIndex(ip, pht_entries) ^ history) % pht_entries;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int bht_entries;\n",
+          "    unsigned int history_bits;\n",
+          "    unsigned int pht_entries;\n",
+          "    unsigned int counter_bits;\n",
+          "    unsigned int history_mask;\n",
+          "    unsigned int counter_max;\n",
+          "    std::vector<unsigned int> bht;\n",
+          "    std::vector<unsigned int> pht;\n"
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class GlobalHistoryTwoLevelPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    GlobalHistoryTwoLevelPredictor(unsigned int pht_entries_, unsigned int bhr_bits_,\n",
+          "                                   unsigned int counter_bits_)\n",
+          "        : BranchPredictor(),\n",
+          "          pht_entries(pht_entries_),\n",
+          "          bhr_bits(bhr_bits_),\n",
+          "          counter_bits(counter_bits_),\n",
+          "          history_mask((1u << bhr_bits_) - 1u),\n",
+          "          counter_max(predictorCounterMax(counter_bits_)),\n",
+          "          global_history(0),\n",
+          "          pht(pht_entries_, 0) {\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int pht_index = phtIndex(ip);\n",
+          "        return predictorCounterTaken(pht[pht_index], counter_bits);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int pht_index = phtIndex(ip);\n",
+          "        unsigned int counter = pht[pht_index];\n",
+          "        predictorUpdateCounter(counter, counter_max, actual);\n",
+          "        pht[pht_index] = counter;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        global_history = ((global_history << 1) | (actual ? 1u : 0u)) & history_mask;\n"
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "copy": [
+          74,
+          75
+        ]
+      },
+      {
+        "student_lines": [
+          "        stream << \"Global-PHT\" << (pht_entries / 1024) << \"K-BHR\"\n",
+          "               << bhr_bits << \"-\" << counter_bits;\n"
+        ]
+      },
+      {
+        "copy": [
+          76,
+          77
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int phtIndex(ADDRINT ip) {\n",
+          "        return (predictorPcIndex(ip, pht_entries) ^ global_history) % pht_entries;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int pht_entries;\n",
+          "    unsigned int bhr_bits;\n",
+          "    unsigned int counter_bits;\n",
+          "    unsigned int history_mask;\n",
+          "    unsigned int counter_max;\n",
+          "    unsigned int global_history;\n",
+          "    std::vector<unsigned int> pht;\n"
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class Alpha21264Predictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    Alpha21264Predictor()\n",
+          "        : BranchPredictor(),\n",
+          "          local_history_table(1024, 0),\n",
+          "          local_pht(1024, 0),\n",
+          "          global_pht(4096, 0),\n",
+          "          choice_pht(4096, 0),\n",
+          "          global_history(0) {\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        bool local_prediction = predictLocal(ip);\n",
+          "        bool global_prediction = predictGlobal(ip);\n",
+          "        return chooseGlobal(ip) ? global_prediction : local_prediction;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int local_history_index = predictorPcIndex(ip, 1024);\n",
+          "        unsigned int old_local_history = local_history_table[local_history_index];\n",
+          "        unsigned int local_pht_index = old_local_history % 1024;\n",
+          "        unsigned int global_pht_index = globalIndex(ip);\n",
+          "        unsigned int choice_index = global_pht_index;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        bool local_prediction = predictorCounterTaken(local_pht[local_pht_index], 3);\n",
+          "        bool global_prediction = predictorCounterTaken(global_pht[global_pht_index], 2);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (local_prediction != global_prediction) {\n",
+          "            unsigned int choice = choice_pht[choice_index];\n",
+          "            if (global_prediction == actual)\n",
+          "                predictorUpdateCounter(choice, 3, true);\n",
+          "            else if (local_prediction == actual)\n",
+          "                predictorUpdateCounter(choice, 3, false);\n",
+          "            choice_pht[choice_index] = choice;\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int local_counter = local_pht[local_pht_index];\n",
+          "        predictorUpdateCounter(local_counter, 7, actual);\n",
+          "        local_pht[local_pht_index] = local_counter;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int global_counter = global_pht[global_pht_index];\n",
+          "        predictorUpdateCounter(global_counter, 3, actual);\n",
+          "        global_pht[global_pht_index] = global_counter;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        local_history_table[local_history_index] =\n",
+          "            ((old_local_history << 1) | (actual ? 1u : 0u)) & 0x3ffu;\n",
+          "        global_history = ((global_history << 1) | (actual ? 1u : 0u)) & 0xfffu;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "student_lines": [
+          "        return \"Alpha21264\";\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    bool predictLocal(ADDRINT ip) {\n",
+          "        unsigned int local_history_index = predictorPcIndex(ip, 1024);\n",
+          "        unsigned int local_pht_index = local_history_table[local_history_index] % 1024;\n",
+          "        return predictorCounterTaken(local_pht[local_pht_index], 3);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    bool predictGlobal(ADDRINT ip) {\n",
+          "        return predictorCounterTaken(global_pht[globalIndex(ip)], 2);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    bool chooseGlobal(ADDRINT ip) {\n",
+          "        return predictorCounterTaken(choice_pht[globalIndex(ip)], 2);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int globalIndex(ADDRINT ip) {\n",
+          "        return (predictorPcIndex(ip, 4096) ^ global_history) % 4096;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    std::vector<unsigned int> local_history_table;\n",
+          "    std::vector<unsigned int> local_pht;\n",
+          "    std::vector<unsigned int> global_pht;\n",
+          "    std::vector<unsigned int> choice_pht;\n",
+          "    unsigned int global_history;\n"
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class NairTwoBitFsmPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    NairTwoBitFsmPredictor(unsigned index_bits_, const std::string &machine_, unsigned output_mask_)\n",
+          "        : BranchPredictor(), index_bits(index_bits_), machine(machine_), output_mask(output_mask_) {\n",
+          "        assert(machine.size() == 8);\n"
+        ]
+      },
+      {
+        "copy": [
+          45,
+          46
+        ]
+      },
+      {
+        "student_lines": [
+          "        TABLE = new unsigned char[table_entries];\n"
+        ]
+      },
+      {
+        "copy": [
+          47,
+          48
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (unsigned state = 0; state < 4; state++) {\n",
+          "            transitions[state][0] = decodeState(machine[2 * state]);\n",
+          "            transitions[state][1] = decodeState(machine[2 * state + 1]);\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          33,
+          34
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    ~NairTwoBitFsmPredictor() { delete[] TABLE; };\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "copy": [
+          54,
+          55
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int state = TABLE[ip_table_index];\n",
+          "        return predictsTaken(state);\n"
+        ]
+      },
+      {
+        "copy": [
+          33,
+          34
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          54,
+          55
+        ]
+      },
+      {
+        "student_lines": [
+          "        unsigned int state = TABLE[ip_table_index];\n",
+          "        TABLE[ip_table_index] = transitions[state][actual ? 1 : 0];\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          33,
+          34
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "copy": [
+          74,
+          75
+        ]
+      },
+      {
+        "student_lines": [
+          "        stream << \"FSM-\" << pow(2.0, double(index_bits)) / 1024.0 << \"K-\"\n",
+          "               << machine << \"-\" << output_mask;\n"
+        ]
+      },
+      {
+        "copy": [
+          76,
+          77
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int decodeState(char state) {\n",
+          "        assert(state >= 'A' && state <= 'D');\n",
+          "        return static_cast<unsigned int>(state - 'A');\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    bool predictsTaken(unsigned int state) {\n",
+          "        assert(state < 4);\n",
+          "        return ((output_mask >> (3 - state)) & 1) != 0;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int index_bits;\n",
+          "    std::string machine;\n",
+          "    unsigned int output_mask;\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned char *TABLE;\n",
+          "    unsigned char transitions[4][2];\n"
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          89,
+          93
+        ]
+      },
+      {
+        "student_lines": [
+          "\t     : table_lines(btb_lines),\n",
+          "\t       table_assoc(btb_assoc),\n",
+          "\t       table_sets(btb_lines / btb_assoc),\n",
+          "\t       table(btb_lines),\n",
+          "\t       lru_clock(0),\n",
+          "\t       correct_target_predictions(0),\n",
+          "\t       incorrect_target_predictions(0),\n",
+          "\t       last_predicted_target_valid(false),\n",
+          "\t       last_predicted_target(0)\n"
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tassert(table_lines > 0);\n",
+          "\t\tassert(table_assoc > 0);\n",
+          "\t\tassert((table_lines % table_assoc) == 0);\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          99
+        ]
+      },
+      {
+        "copy": [
+          100,
+          103
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tEntry *entry = findEntry(ip);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tif (entry != 0) {\n",
+          "\t\t\tentry->last_used = ++lru_clock;\n",
+          "\t\t\tlast_predicted_target_valid = true;\n",
+          "\t\t\tlast_predicted_target = entry->target;\n"
+        ]
+      },
+      {
+        "copy": [
+          166,
+          167
+        ]
+      },
+      {
+        "copy": [
+          167,
+          168
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tlast_predicted_target_valid = false;\n",
+          "\t\tlast_predicted_target = 0;\n"
+        ]
+      },
+      {
+        "copy": [
+          104,
+          108
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tif (predicted && actual) {\n",
+          "\t\t\tif (last_predicted_target_valid && last_predicted_target == target)\n",
+          "\t\t\t\tcorrect_target_predictions++;\n",
+          "\t\t\telse\n",
+          "\t\t\t\tincorrect_target_predictions++;\n"
+        ]
+      },
+      {
+        "copy": [
+          167,
+          168
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          197,
+          198
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tif (!actual)\n",
+          "\t\t\treturn;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tEntry *entry = findEntry(ip);\n",
+          "\t\tif (entry == 0)\n",
+          "\t\t\tentry = chooseVictim(ip);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tentry->valid = true;\n",
+          "\t\tentry->ip = ip;\n",
+          "\t\tentry->target = target;\n",
+          "\t\tentry->last_used = ++lru_clock;\n"
+        ]
+      },
+      {
+        "copy": [
+          109,
+          118
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\treturn correct_target_predictions;\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    UINT64 getNumIncorrectTargetPredictions() {\n",
+          "\t\treturn incorrect_target_predictions;\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "\tstruct Entry {\n",
+          "\t\tEntry() : valid(false), ip(0), target(0), last_used(0) {}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tbool valid;\n",
+          "\t\tADDRINT ip;\n",
+          "\t\tADDRINT target;\n",
+          "\t\tUINT64 last_used;\n",
+          "\t};\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\tunsigned int setIndex(ADDRINT ip) {\n",
+          "\t\treturn (ip >> 4) % table_sets;\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\tEntry *entryAt(unsigned int set, unsigned int way) {\n",
+          "\t\treturn &table[set * table_assoc + way];\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\tEntry *findEntry(ADDRINT ip) {\n",
+          "\t\tunsigned int set = setIndex(ip);\n",
+          "\t\tfor (int way = 0; way < table_assoc; way++) {\n",
+          "\t\t\tEntry *entry = entryAt(set, way);\n",
+          "\t\t\tif (entry->valid && entry->ip == ip)\n",
+          "\t\t\t\treturn entry;\n"
+        ]
+      },
+      {
+        "copy": [
+          167,
+          168
+        ]
+      },
+      {
+        "copy": [
+          119,
+          122
+        ]
+      },
+      {
+        "student_lines": [
+          "\tEntry *chooseVictim(ADDRINT ip) {\n",
+          "\t\tunsigned int set = setIndex(ip);\n",
+          "\t\tEntry *victim = entryAt(set, 0);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tfor (int way = 0; way < table_assoc; way++) {\n",
+          "\t\t\tEntry *entry = entryAt(set, way);\n",
+          "\t\t\tif (!entry->valid)\n",
+          "\t\t\t\treturn entry;\n",
+          "\t\t\tif (entry->last_used < victim->last_used)\n",
+          "\t\t\t\tvictim = entry;\n"
+        ]
+      },
+      {
+        "copy": [
+          167,
+          168
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\treturn victim;\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          123,
+          124
+        ]
+      },
+      {
+        "student_lines": [
+          "\tint table_sets;\n",
+          "\tstd::vector<Entry> table;\n",
+          "\tUINT64 lru_clock;\n",
+          "\tUINT64 correct_target_predictions;\n",
+          "\tUINT64 incorrect_target_predictions;\n",
+          "\tbool last_predicted_target_valid;\n",
+          "\tADDRINT last_predicted_target;\n"
+        ]
+      },
+      {
+        "copy": [
+          124,
+          149
+        ]
+      },
+      {
+        "student_lines": [
+          "\tPerceptronPredictor(int perceptronTableSize, int historyTableSize)\n",
+          "\t\t: BranchPredictor(),\n",
+          "\t\t  perceptronTableSize_(perceptronTableSize),\n",
+          "\t\t  historyTableSize_(historyTableSize),\n",
+          "\t\t  kTheta_(static_cast<int>(1.93 * historyTableSize + 14)) {\n"
+        ]
+      },
+      {
+        "copy": [
+          150,
+          178
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tstd::string output = \"Perceptron-M\" + std::to_string(perceptronTableSize_) + \"-N\" + std::to_string(historyTableSize_);\n"
+        ]
+      },
+      {
+        "copy": [
+          179,
+          222
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\tint abs_y = (y < 0) ? -y : y;\n",
+          "\t\tif (sign(y) != t || abs_y <= kTheta_) {\n",
+          "\t\t\tint b = clampWeight(bias_[key] + t);\n",
+          "\t\t\tbias_[key] = b;\n"
+        ]
+      },
+      {
+        "copy": [
+          225,
+          231
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\t\t\t\tweights_[key][i] = clampWeight(weights_[key][i] + 1);\n"
+        ]
+      },
+      {
+        "copy": [
+          232,
+          233
+        ]
+      },
+      {
+        "student_lines": [
+          "\t\t\t\t\tweights_[key][i] = clampWeight(weights_[key][i] - 1);\n"
+        ]
+      },
+      {
+        "copy": [
+          234,
+          240
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "\tint clampWeight(int value) {\n",
+          "\t\tif (value > kTheta_)\n",
+          "\t\t\treturn kTheta_;\n",
+          "\t\tif (value < -kTheta_)\n",
+          "\t\t\treturn -kTheta_;\n",
+          "\t\treturn value;\n"
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "copy": [
+          38,
+          39
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class TournamentHybridPredictor : public BranchPredictor\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "copy": [
+          14,
+          15
+        ]
+      },
+      {
+        "student_lines": [
+          "    TournamentHybridPredictor(unsigned int meta_entries_, BranchPredictor *predictor0_,\n",
+          "                              BranchPredictor *predictor1_, const std::string &name_)\n",
+          "        : BranchPredictor(),\n",
+          "          meta_entries(meta_entries_),\n",
+          "          predictor0(predictor0_),\n",
+          "          predictor1(predictor1_),\n",
+          "          name(name_),\n",
+          "          meta(meta_entries_, 0),\n",
+          "          last_predictor0_prediction(false),\n",
+          "          last_predictor1_prediction(false),\n",
+          "          last_meta_index(0) {\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "        last_predictor0_prediction = predictor0->predict(ip, target);\n",
+          "        last_predictor1_prediction = predictor1->predict(ip, target);\n",
+          "        last_meta_index = predictorPcIndex(ip, meta_entries);\n",
+          "        return choosePredictor1(last_meta_index) ? last_predictor1_prediction : last_predictor0_prediction;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "student_lines": [
+          "        predictor0->update(last_predictor0_prediction, actual, ip, target);\n",
+          "        predictor1->update(last_predictor1_prediction, actual, ip, target);\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (last_predictor0_prediction != last_predictor1_prediction) {\n",
+          "            unsigned int counter = meta[last_meta_index];\n",
+          "            if (last_predictor1_prediction == actual)\n",
+          "                predictorUpdateCounter(counter, 3, true);\n",
+          "            else if (last_predictor0_prediction == actual)\n",
+          "                predictorUpdateCounter(counter, 3, false);\n",
+          "            meta[last_meta_index] = counter;\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          73,
+          74
+        ]
+      },
+      {
+        "student_lines": [
+          "        return name;\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    bool choosePredictor1(unsigned int meta_index) {\n",
+          "        return predictorCounterTaken(meta[meta_index], 2);\n"
+        ]
+      },
+      {
+        "copy": [
+          77,
+          78
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    unsigned int meta_entries;\n",
+          "    BranchPredictor *predictor0;\n",
+          "    BranchPredictor *predictor1;\n",
+          "    std::string name;\n",
+          "    std::vector<unsigned int> meta;\n",
+          "    bool last_predictor0_prediction;\n",
+          "    bool last_predictor1_prediction;\n",
+          "    unsigned int last_meta_index;\n"
+        ]
+      },
+      {
+        "copy": [
+          240,
+          244
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/1st/advcomparch-ex1-helpcode/pintool/cslab_branch.cpp",
+    "base_path": "exercises/1st/advcomparch-ex1-helpcode/pintool/cslab_branch.cpp",
+    "base_source": "CSLab exercise 1 starter as recorded in initial import 8160b46",
+    "base_sha256": "c6802260cb2d3945ffa6979c27514a704c55419235fb756899500a785ce5e857",
+    "reconstructed_sha256": "8ad2b3c471b1c6093fff6fdcb0d91246dd48b0149b18e659cd5ea911949fe86a",
+    "segments": [
+      {
+        "copy": [
+          0,
+          17
+        ]
+      },
+      {
+        "student_lines": [
+          "KNOB<string> KnobPredictorSet(KNOB_MODE_WRITEONCE, \"pintool\",\n",
+          "    \"predictor_set\", \"5.3\", \"predictor set to instantiate: 5.3, 5.4, 5.5, 5.6.1, 5.6.2, 5.7, pentium-m, all\");\n"
+        ]
+      },
+      {
+        "copy": [
+          17,
+          111
+        ]
+      },
+      {
+        "student_lines": [
+          "    // For BTB we instrument all branches and calls except returns.\n",
+          "    if ((INS_IsBranch(ins) || INS_IsCall(ins)) && !INS_IsRet(ins))\n"
+        ]
+      },
+      {
+        "copy": [
+          113,
+          149
+        ]
+      },
+      {
+        "student_lines": [
+          "    outFile <<\"BTB Predictors: (Name - Correct - Incorrect - TargetCorrect - TargetIncorrect)\\n\";\n"
+        ]
+      },
+      {
+        "copy": [
+          150,
+          155
+        ]
+      },
+      {
+        "student_lines": [
+          "                << curr_predictor->getNumCorrectTargetPredictions() << \" \"\n",
+          "                << curr_predictor->getNumIncorrectTargetPredictions() << \"\\n\";\n"
+        ]
+      },
+      {
+        "copy": [
+          156,
+          165
+        ]
+      },
+      {
+        "student_lines": [
+          "    string predictor_set = KnobPredictorSet.Value();\n"
+        ]
+      },
+      {
+        "copy": [
+          165,
+          166
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.3\" || predictor_set == \"all\") {\n",
+          "        // 5.3(i): fixed 16K-entry BHT, standard n-bit saturating counters.\n",
+          "        branch_predictors.push_back(new NbitPredictor(14, 1));\n",
+          "        branch_predictors.push_back(new NbitPredictor(14, 2));\n",
+          "        branch_predictors.push_back(new NbitPredictor(14, 3));\n",
+          "        branch_predictors.push_back(new NbitPredictor(14, 4));\n"
+        ]
+      },
+      {
+        "copy": [
+          169,
+          170
+        ]
+      },
+      {
+        "student_lines": [
+          "        // 5.3(ii): Nair Table VI alternatives. ABACBDCD:3 is the standard\n",
+          "        // 2-bit saturating counter above, so only the four non-standard FSMs\n",
+          "        // are instantiated here.\n",
+          "        branch_predictors.push_back(new NairTwoBitFsmPredictor(14, \"BCBAADCD\", 3));\n",
+          "        branch_predictors.push_back(new NairTwoBitFsmPredictor(14, \"BCBABDCD\", 3));\n",
+          "        branch_predictors.push_back(new NairTwoBitFsmPredictor(14, \"BCBDACBA\", 10));\n",
+          "        branch_predictors.push_back(new NairTwoBitFsmPredictor(14, \"BACADBDC\", 12));\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // 5.3(iii): fixed 32K-bit hardware budget variants.\n",
+          "        branch_predictors.push_back(new NbitPredictor(15, 1));\n",
+          "        branch_predictors.push_back(new NbitPredictor(13, 4));\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.6.1\" || predictor_set == \"all\") {\n",
+          "        // 5.6.1: perceptron predictors for all assignment M and n pairs.\n",
+          "        UINT32 perceptron_counts[] = {32, 512, 1024};\n",
+          "        UINT32 history_lengths[] = {4, 8, 32, 60, 72};\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = 0; i < sizeof(perceptron_counts) / sizeof(perceptron_counts[0]); i++) {\n",
+          "            for (UINT32 j = 0; j < sizeof(history_lengths) / sizeof(history_lengths[0]); j++) {\n",
+          "                branch_predictors.push_back(new PerceptronPredictor(perceptron_counts[i], history_lengths[j]));\n",
+          "            }\n",
+          "        }\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.6.2\" || predictor_set == \"all\") {\n",
+          "        // 5.6.2: final cross-family comparison. Most predictors are sized\n",
+          "        // near 32K bits, except Pentium-M (~30K) and Alpha21264 (~29K).\n",
+          "        branch_predictors.push_back(new StaticAlwaysTakenPredictor());\n",
+          "        branch_predictors.push_back(new StaticBTFNTPredictor());\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // Best fixed-32K n-bit predictor from 5.3(iii).\n",
+          "        branch_predictors.push_back(new NbitPredictor(14, 2));\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        branch_predictors.push_back(new PentiumMBranchPredictor());\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // Local-history two-level predictors:\n",
+          "        // PHT = 8192 2-bit counters = 16K bits, BHT = X * Z = 16K bits.\n",
+          "        branch_predictors.push_back(new LocalHistoryTwoLevelPredictor(2048, 8, 8192, 2));\n",
+          "        branch_predictors.push_back(new LocalHistoryTwoLevelPredictor(4096, 4, 8192, 2));\n",
+          "        branch_predictors.push_back(new LocalHistoryTwoLevelPredictor(8192, 2, 8192, 2));\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // Global-history two-level predictors:\n",
+          "        // PHT = 16K 2-bit counters = 32K bits; BHR overhead is ignored.\n",
+          "        branch_predictors.push_back(new GlobalHistoryTwoLevelPredictor(16384, 4, 2));\n",
+          "        branch_predictors.push_back(new GlobalHistoryTwoLevelPredictor(16384, 8, 2));\n",
+          "        branch_predictors.push_back(new GlobalHistoryTwoLevelPredictor(16384, 12, 2));\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // Perceptrons near 32K bits:\n",
+          "        // cost = M * (n + 1) * (1 + floor(log2(theta))).\n",
+          "        branch_predictors.push_back(new PerceptronPredictor(728, 8));\n",
+          "        branch_predictors.push_back(new PerceptronPredictor(141, 32));\n",
+          "        branch_predictors.push_back(new PerceptronPredictor(56, 72));\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        branch_predictors.push_back(new Alpha21264Predictor());\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "        // Tournament hybrids: meta predictor overhead is ignored; P0 and P1\n",
+          "        // are each approximately 16K bits.\n",
+          "        branch_predictors.push_back(\n",
+          "            new TournamentHybridPredictor(\n",
+          "                1024,\n",
+          "                new NbitPredictor(14, 1),\n",
+          "                new GlobalHistoryTwoLevelPredictor(8192, 8, 2),\n",
+          "                \"Tournament-M1024-Nbit16K1-Global8K-BHR8\"));\n",
+          "        branch_predictors.push_back(\n",
+          "            new TournamentHybridPredictor(\n",
+          "                1024,\n",
+          "                new LocalHistoryTwoLevelPredictor(2048, 4, 4096, 2),\n",
+          "                new GlobalHistoryTwoLevelPredictor(8192, 8, 2),\n",
+          "                \"Tournament-M1024-Local2048x4-Global8K-BHR8\"));\n",
+          "        branch_predictors.push_back(\n",
+          "            new TournamentHybridPredictor(\n",
+          "                2048,\n",
+          "                new NbitPredictor(13, 2),\n",
+          "                new PerceptronPredictor(364, 8),\n",
+          "                \"Tournament-M2048-Nbit8K2-Perceptron16K-N8\"));\n",
+          "        branch_predictors.push_back(\n",
+          "            new TournamentHybridPredictor(\n",
+          "                2048,\n",
+          "                new LocalHistoryTwoLevelPredictor(1024, 6, 4096, 2),\n",
+          "                new PerceptronPredictor(364, 8),\n",
+          "                \"Tournament-M2048-Local1024x6-Perceptron16K-N8\"));\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.7\" || predictor_set == \"all\") {\n",
+          "        // 5.7: ref-input validation of the top three predictors selected\n",
+          "        // from the 5.6.2 train-input comparison.\n",
+          "        branch_predictors.push_back(new Alpha21264Predictor());\n",
+          "        branch_predictors.push_back(new PerceptronPredictor(141, 32));\n",
+          "        branch_predictors.push_back(new PerceptronPredictor(56, 72));\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"pentium-m\" || predictor_set == \"all\") {\n",
+          "        // Pentium-M predictor\n",
+          "        PentiumMBranchPredictor *pentiumPredictor = new PentiumMBranchPredictor();\n",
+          "        branch_predictors.push_back(pentiumPredictor);\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.4\" || predictor_set == \"all\") {\n",
+          "        // 5.4: total BTB entries, associativity.\n",
+          "        btb_predictors.push_back(new BTBPredictor(512, 1));\n",
+          "        btb_predictors.push_back(new BTBPredictor(512, 2));\n",
+          "        btb_predictors.push_back(new BTBPredictor(256, 2));\n",
+          "        btb_predictors.push_back(new BTBPredictor(256, 4));\n",
+          "        btb_predictors.push_back(new BTBPredictor(128, 2));\n",
+          "        btb_predictors.push_back(new BTBPredictor(128, 4));\n",
+          "        btb_predictors.push_back(new BTBPredictor(64, 4));\n",
+          "        btb_predictors.push_back(new BTBPredictor(64, 8));\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (branch_predictors.empty() && btb_predictors.empty() && predictor_set != \"5.5\") {\n",
+          "        cerr << \"Unknown -predictor_set value: \" << predictor_set << \"\\n\";\n",
+          "        cerr << \"Valid values: 5.3, 5.4, 5.5, 5.6.1, 5.6.2, 5.7, pentium-m, all\\n\";\n",
+          "        PIN_ExitProcess(1);\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          171,
+          175
+        ]
+      },
+      {
+        "student_lines": [
+          "    string predictor_set = KnobPredictorSet.Value();\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (predictor_set == \"5.5\" || predictor_set == \"all\") {\n",
+          "        UINT32 sizes[] = {4, 8, 16, 32, 48, 64};\n",
+          "        for (UINT32 i = 0; i < sizeof(sizes) / sizeof(sizes[0]); i++)\n",
+          "            ras_vec.push_back(new RAS(sizes[i]));\n",
+          "        return;\n"
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "copy": [
+          175,
+          208
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/2nd/advcomparch-ex2-helpcode/pintool/cache.h",
+    "base_path": "exercises/2nd/advcomparch-ex2-helpcode/pintool/cache.h",
+    "base_source": "CSLab 2025–26 exercise 2 starter package",
+    "base_sha256": "da854ccd6e26d81196600cfa54f48715526af0ec26ee42013eb526d61d20972b",
+    "reconstructed_sha256": "ad586d24e6b41da3f7239eb97ba6da68c303198d92a2572ddcb5eceb7b9e999a",
+    "segments": [
+      {
+        "copy": [
+          0,
+          5
+        ]
+      },
+      {
+        "student_lines": [
+          "#include <vector>\n"
+        ]
+      },
+      {
+        "copy": [
+          5,
+          53
+        ]
+      },
+      {
+        "student_lines": [
+          "static VOID SeedReplacementRandom()\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    static bool seeded = false;\n",
+          "    if (!seeded) {\n",
+          "        srand(21026);\n",
+          "        seeded = true;\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          284,
+          285
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "static UINT32 SrripMaxRrpv(UINT32 associativity)\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (associativity >= 31)\n",
+          "        return 0xffffffff;\n",
+          "    return (1U << associativity) - 1U;\n"
+        ]
+      },
+      {
+        "copy": [
+          284,
+          285
+        ]
+      },
+      {
+        "copy": [
+          56,
+          112
+        ]
+      },
+      {
+        "copy": [
+          112,
+          113
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          21,
+          22
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class MRU\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          61,
+          62
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          63,
+          64
+        ]
+      },
+      {
+        "student_lines": [
+          "    MRU(UINT32 associativity = 8)\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          75,
+          76
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    string Name() { return \"MRU\"; }\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          79,
+          80
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag) {\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "copy": [
+          86,
+          87
+        ]
+      },
+      {
+        "copy": [
+          87,
+          88
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          91,
+          92
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (_tags.size() >= _associativity) {\n",
+          "            ret = _tags.back();\n",
+          "            _tags.pop_back();\n"
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          97,
+          98
+        ]
+      },
+      {
+        "copy": [
+          102,
+          103
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          105,
+          106
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag) {\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "copy": [
+          112,
+          113
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          21,
+          22
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class Random\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          61,
+          62
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          63,
+          64
+        ]
+      },
+      {
+        "student_lines": [
+          "    Random(UINT32 associativity = 8)\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "student_lines": [
+          "        SeedReplacementRandom();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "student_lines": [
+          "        SeedReplacementRandom();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          75,
+          76
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    string Name() { return \"Random\"; }\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          79,
+          80
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag)\n"
+        ]
+      },
+      {
+        "copy": [
+          87,
+          88
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          91,
+          92
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (_tags.size() >= _associativity) {\n",
+          "            UINT32 victim = rand() % _tags.size();\n",
+          "            ret = _tags[victim];\n",
+          "            _tags[victim] = tag;\n",
+          "        } else {\n",
+          "            _tags.push_back(tag);\n"
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          102,
+          103
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          105,
+          106
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag) {\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "copy": [
+          112,
+          113
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          21,
+          22
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class LFU\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "student_lines": [
+          "    std::vector<UINT64> _use_counts;\n"
+        ]
+      },
+      {
+        "copy": [
+          61,
+          62
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          63,
+          64
+        ]
+      },
+      {
+        "student_lines": [
+          "    LFU(UINT32 associativity = 8)\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "student_lines": [
+          "        _use_counts.clear();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "student_lines": [
+          "        _use_counts.clear();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          75,
+          76
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    string Name() { return \"LFU\"; }\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          79,
+          80
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = 0; i < _tags.size(); i++)\n"
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (_tags[i] == tag) {\n",
+          "                _use_counts[i]++;\n"
+        ]
+      },
+      {
+        "copy": [
+          87,
+          88
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          91,
+          92
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (_tags.size() >= _associativity) {\n",
+          "            UINT32 victim = 0;\n",
+          "            for (UINT32 i = 1; i < _use_counts.size(); i++) {\n",
+          "                if (_use_counts[i] < _use_counts[victim])\n",
+          "                    victim = i;\n"
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "student_lines": [
+          "            ret = _tags[victim];\n",
+          "            _tags[victim] = tag;\n",
+          "            _use_counts[victim] = 1;\n",
+          "        } else {\n",
+          "            _tags.push_back(tag);\n",
+          "            _use_counts.push_back(1);\n"
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          102,
+          103
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          105,
+          106
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = 0; i < _tags.size(); i++)\n"
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (_tags[i] == tag) {\n",
+          "                _tags.erase(_tags.begin() + i);\n",
+          "                _use_counts.erase(_use_counts.begin() + i);\n"
+        ]
+      },
+      {
+        "copy": [
+          112,
+          113
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          21,
+          22
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class LIP\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          60,
+          61
+        ]
+      },
+      {
+        "copy": [
+          61,
+          62
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          63,
+          64
+        ]
+      },
+      {
+        "student_lines": [
+          "    LIP(UINT32 associativity = 8)\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "copy": [
+          67,
+          68
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          75,
+          76
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    string Name() { return \"LIP\"; }\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          79,
+          80
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag) {\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "copy": [
+          86,
+          87
+        ]
+      },
+      {
+        "copy": [
+          87,
+          88
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          91,
+          92
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (_tags.size() >= _associativity) {\n"
+        ]
+      },
+      {
+        "copy": [
+          99,
+          100
+        ]
+      },
+      {
+        "copy": [
+          100,
+          101
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          97,
+          98
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = _tags.size() - 1; i > 0; i--)\n",
+          "            _tags[i] = _tags[i - 1];\n",
+          "        _tags[0] = tag;\n"
+        ]
+      },
+      {
+        "copy": [
+          102,
+          103
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          105,
+          106
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          81,
+          82
+        ]
+      },
+      {
+        "copy": [
+          82,
+          83
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (*it == tag) {\n"
+        ]
+      },
+      {
+        "copy": [
+          85,
+          86
+        ]
+      },
+      {
+        "copy": [
+          112,
+          113
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          21,
+          22
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "class SRRIP\n"
+        ]
+      },
+      {
+        "copy": [
+          35,
+          36
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "student_lines": [
+          "    struct Entry\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        CACHE_TAG tag;\n",
+          "        UINT32 rrpv;\n"
+        ]
+      },
+      {
+        "copy": [
+          137,
+          138
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    std::vector<Entry> _entries;\n"
+        ]
+      },
+      {
+        "copy": [
+          61,
+          62
+        ]
+      },
+      {
+        "student_lines": [
+          "    UINT32 _max_rrpv;\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    UINT32 InsertionRrpv() const\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        return _max_rrpv > 0 ? _max_rrpv - 1 : 0;\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          63,
+          64
+        ]
+      },
+      {
+        "student_lines": [
+          "    SRRIP(UINT32 associativity = 8)\n"
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "student_lines": [
+          "        _max_rrpv = SrripMaxRrpv(associativity);\n",
+          "        _entries.clear();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          70,
+          71
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          66,
+          67
+        ]
+      },
+      {
+        "student_lines": [
+          "        _max_rrpv = SrripMaxRrpv(associativity);\n",
+          "        _entries.clear();\n"
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          75,
+          76
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "    string Name() { return \"SRRIP\"; }\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          79,
+          80
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = 0; i < _entries.size(); i++)\n"
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (_entries[i].tag == tag) {\n",
+          "                _entries[i].rrpv = 0;\n"
+        ]
+      },
+      {
+        "copy": [
+          87,
+          88
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          91,
+          92
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          94,
+          95
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "copy": [
+          96,
+          97
+        ]
+      },
+      {
+        "student_lines": [
+          "        Entry inserted;\n",
+          "        inserted.tag = tag;\n",
+          "        inserted.rrpv = InsertionRrpv();\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        if (_entries.size() < _associativity) {\n",
+          "            _entries.push_back(inserted);\n",
+          "            return ret;\n"
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "        while (true) {\n",
+          "            for (UINT32 i = 0; i < _entries.size(); i++) {\n",
+          "                if (_entries[i].rrpv == _max_rrpv) {\n",
+          "                    ret = _entries[i].tag;\n",
+          "                    _entries[i] = inserted;\n",
+          "                    return ret;\n"
+        ]
+      },
+      {
+        "copy": [
+          453,
+          454
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "            for (UINT32 i = 0; i < _entries.size(); i++) {\n",
+          "                if (_entries[i].rrpv < _max_rrpv)\n",
+          "                    _entries[i].rrpv++;\n"
+        ]
+      },
+      {
+        "copy": [
+          88,
+          89
+        ]
+      },
+      {
+        "copy": [
+          89,
+          90
+        ]
+      },
+      {
+        "copy": [
+          68,
+          69
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "copy": [
+          105,
+          106
+        ]
+      },
+      {
+        "copy": [
+          65,
+          66
+        ]
+      },
+      {
+        "student_lines": [
+          "        for (UINT32 i = 0; i < _entries.size(); i++)\n"
+        ]
+      },
+      {
+        "copy": [
+          83,
+          84
+        ]
+      },
+      {
+        "student_lines": [
+          "            if (_entries[i].tag == tag) {\n",
+          "                _entries.erase(_entries.begin() + i);\n"
+        ]
+      },
+      {
+        "copy": [
+          112,
+          463
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/2nd/advcomparch-ex2-helpcode/pintool/simulator.cpp",
+    "base_path": "exercises/2nd/advcomparch-ex2-helpcode/pintool/simulator.cpp",
+    "base_source": "CSLab 2025–26 exercise 2 starter package",
+    "base_sha256": "fa6d6ea7664130404b4b1e6178bbfd036e7b5db2793bf123653c62590cbbb622",
+    "reconstructed_sha256": "b3f1ec5f672f34f03b855dbfc92d30a337b56c00f6be5caf0b151dd1dbe390b4",
+    "segments": [
+      {
+        "copy": [
+          0,
+          5
+        ]
+      },
+      {
+        "student_lines": [
+          "#include <string>\n"
+        ]
+      },
+      {
+        "copy": [
+          5,
+          38
+        ]
+      },
+      {
+        "student_lines": [
+          "// Replacement policy\n",
+          "KNOB<string> KnobReplacementPolicy(KNOB_MODE_WRITEONCE, \"pintool\",\n",
+          "    \"repl\",\"LRU\", \"replacement policy: LRU, MRU, Random, LFU, LIP, SRRIP\");\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "copy": [
+          38,
+          44
+        ]
+      },
+      {
+        "student_lines": [
+          "typedef enum\n"
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "    ACCESS_KIND_LOAD,\n",
+          "    ACCESS_KIND_STORE\n",
+          "} ACCESS_KIND;\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "class CacheModelBase\n"
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "  public:\n",
+          "    virtual ~CacheModelBase() {}\n",
+          "    virtual UINT32 Access(ADDRINT addr, ACCESS_KIND accessKind) = 0;\n",
+          "    virtual string StatsLong(string prefix = \"\") const = 0;\n",
+          "    virtual string PrintCache(string prefix = \"\") const = 0;\n",
+          "};\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "template <class SET>\n",
+          "class CacheModel : public CacheModelBase\n"
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "  private:\n",
+          "    TWO_LEVEL_CACHE<SET> _cache;\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "  public:\n",
+          "    CacheModel(std::string name,\n",
+          "               UINT32 l1CacheSize, UINT32 l1BlockSize, UINT32 l1Associativity,\n",
+          "               UINT32 l2CacheSize, UINT32 l2BlockSize, UINT32 l2Associativity,\n",
+          "               UINT32 l2PrefetchLines,\n",
+          "               UINT32 l1HitLatency, UINT32 l2HitLatency,\n",
+          "               UINT32 l2MissLatency)\n",
+          "      : _cache(name,\n",
+          "               l1CacheSize, l1BlockSize, l1Associativity,\n",
+          "               l2CacheSize, l2BlockSize, l2Associativity,\n",
+          "               l2PrefetchLines,\n",
+          "               l1HitLatency, l2HitLatency, l2MissLatency)\n",
+          "    {\n"
+        ]
+      },
+      {
+        "copy": [
+          106,
+          107
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    UINT32 Access(ADDRINT addr, ACCESS_KIND accessKind)\n",
+          "    {\n",
+          "        typename TWO_LEVEL_CACHE<SET>::ACCESS_TYPE accessType =\n",
+          "            accessKind == ACCESS_KIND_LOAD\n",
+          "                ? TWO_LEVEL_CACHE<SET>::ACCESS_TYPE_LOAD\n",
+          "                : TWO_LEVEL_CACHE<SET>::ACCESS_TYPE_STORE;\n",
+          "        return _cache.Access(addr, accessType);\n"
+        ]
+      },
+      {
+        "copy": [
+          106,
+          107
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    string StatsLong(string prefix = \"\") const\n",
+          "    {\n",
+          "        return _cache.StatsLong(prefix);\n"
+        ]
+      },
+      {
+        "copy": [
+          106,
+          107
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    string PrintCache(string prefix = \"\") const\n",
+          "    {\n",
+          "        return _cache.PrintCache(prefix);\n"
+        ]
+      },
+      {
+        "copy": [
+          106,
+          107
+        ]
+      },
+      {
+        "student_lines": [
+          "};\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "CacheModelBase *two_level_cache;\n"
+        ]
+      },
+      {
+        "copy": [
+          46,
+          70
+        ]
+      },
+      {
+        "student_lines": [
+          "    total_cycles += two_level_cache->Access(addr, ACCESS_KIND_LOAD);\n"
+        ]
+      },
+      {
+        "copy": [
+          71,
+          80
+        ]
+      },
+      {
+        "student_lines": [
+          "    total_cycles += two_level_cache->Access(addr, ACCESS_KIND_STORE);\n"
+        ]
+      },
+      {
+        "copy": [
+          81,
+          128
+        ]
+      },
+      {
+        "student_lines": [
+          "    delete two_level_cache;\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "copy": [
+          128,
+          136
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "copy": [
+          12,
+          13
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "template <class SET>\n",
+          "CacheModelBase *NewCacheModel()\n"
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "    return new CacheModel<SET>(\"Two level Cache hierarchy\",\n",
+          "                               KnobL1CacheSize.Value() * KILO,\n",
+          "                               KnobL1BlockSize.Value(),\n",
+          "                               KnobL1Associativity.Value(),\n",
+          "                               KnobL2CacheSize.Value() * KILO,\n",
+          "                               KnobL2BlockSize.Value(),\n",
+          "                               KnobL2Associativity.Value(),\n",
+          "                               0,\n",
+          "                               1,\n",
+          "                               10,\n",
+          "                               200);\n",
+          "                               //KnobL2PrefetchLines.Value()); (I don't want prefetching at all in this run, so hardcode 0)\n"
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "CacheModelBase *CreateCacheModel(string policy)\n"
+        ]
+      },
+      {
+        "copy": [
+          53,
+          54
+        ]
+      },
+      {
+        "student_lines": [
+          "    if (policy == \"LRU\")\n",
+          "        return NewCacheModel<CACHE_SET::LRU>();\n",
+          "    if (policy == \"MRU\")\n",
+          "        return NewCacheModel<CACHE_SET::MRU>();\n",
+          "    if (policy == \"Random\")\n",
+          "        return NewCacheModel<CACHE_SET::Random>();\n",
+          "    if (policy == \"LFU\")\n",
+          "        return NewCacheModel<CACHE_SET::LFU>();\n",
+          "    if (policy == \"LIP\")\n",
+          "        return NewCacheModel<CACHE_SET::LIP>();\n",
+          "    if (policy == \"SRRIP\")\n",
+          "        return NewCacheModel<CACHE_SET::SRRIP>();\n"
+        ]
+      },
+      {
+        "copy": [
+          1,
+          2
+        ]
+      },
+      {
+        "student_lines": [
+          "    cerr << \"Unknown replacement policy '\" << policy\n",
+          "         << \"'. Valid choices: LRU, MRU, Random, LFU, LIP, SRRIP.\" << endl;\n"
+        ]
+      },
+      {
+        "copy": [
+          168,
+          169
+        ]
+      },
+      {
+        "copy": [
+          59,
+          60
+        ]
+      },
+      {
+        "copy": [
+          136,
+          150
+        ]
+      },
+      {
+        "student_lines": [
+          "    two_level_cache = CreateCacheModel(KnobReplacementPolicy.Value());\n",
+          "    if (two_level_cache == 0)\n"
+        ]
+      },
+      {
+        "copy": [
+          144,
+          145
+        ]
+      },
+      {
+        "copy": [
+          159,
+          174
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/3rd/advcomparch-ex3-helpcode/Makefile",
+    "base_path": "exercises/3rd/advcomparch-ex3-helpcode/Makefile",
+    "base_source": "CSLab 2025–26 exercise 3 starter package",
+    "base_sha256": "73a43ef47025e010e3336f049b6cdd92689225b9b967f5ad279f8e157ecf4881",
+    "reconstructed_sha256": "64f3a2dd133cdaf15fcb625d7af272d8e872778d570bac7821b6c6df8697a457",
+    "segments": [
+      {
+        "student_lines": [
+          "CC := gcc\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "BIN_DIR ?= bin\n",
+          "SNIPER_BASE_DIR ?= /root/sniper\n",
+          "SNIPER_INCLUDE_DIR := $(SNIPER_BASE_DIR)/include\n"
+        ]
+      },
+      {
+        "copy": [
+          4,
+          5
+        ]
+      },
+      {
+        "student_lines": [
+          "CPPFLAGS ?=\n",
+          "CFLAGS ?= -Wall -O0\n"
+        ]
+      },
+      {
+        "copy": [
+          12,
+          13
+        ]
+      },
+      {
+        "student_lines": [
+          "LDFLAGS ?=\n",
+          "LDLIBS ?= -pthread\n"
+        ]
+      },
+      {
+        "copy": [
+          6,
+          7
+        ]
+      },
+      {
+        "student_lines": [
+          "SOURCE := locks_scalability.c\n",
+          "HEADERS := lock.h\n"
+        ]
+      },
+      {
+        "copy": [
+          9,
+          10
+        ]
+      },
+      {
+        "student_lines": [
+          "IMPLEMENTATIONS := tas_cas tas_ts ttas_cas ttas_ts mutex\n"
+        ]
+      },
+      {
+        "copy": [
+          13,
+          14
+        ]
+      },
+      {
+        "student_lines": [
+          "LOCK_FLAG_tas_cas := TAS_CAS\n",
+          "LOCK_FLAG_tas_ts := TAS_TS\n",
+          "LOCK_FLAG_ttas_cas := TTAS_CAS\n",
+          "LOCK_FLAG_ttas_ts := TTAS_TS\n",
+          "LOCK_FLAG_mutex := MUTEX\n"
+        ]
+      },
+      {
+        "copy": [
+          16,
+          17
+        ]
+      },
+      {
+        "student_lines": [
+          "REAL_BINARIES := $(addprefix $(BIN_DIR)/locks_,$(addsuffix _real,$(IMPLEMENTATIONS)))\n",
+          "SNIPER_BINARIES := $(addprefix $(BIN_DIR)/locks_,$(addsuffix _sniper,$(IMPLEMENTATIONS)))\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "TEST_THREADS ?= 4\n",
+          "TEST_ITERATIONS ?= 10000\n",
+          "TEST_GRAIN ?= 10\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          ".PHONY: all real sniper check-real check-sniper-config clean help\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "all: real\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "real: $(REAL_BINARIES)\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "sniper: check-sniper-config $(SNIPER_BINARIES)\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "$(BIN_DIR):\n",
+          "\tmkdir -p $@\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "define REAL_BINARY_template\n",
+          "$(BIN_DIR)/locks_$(1)_real: $(SOURCE) $(HEADERS) | $(BIN_DIR)\n",
+          "\t$(CC) $(CPPFLAGS) $(CFLAGS) -DREAL -D$(LOCK_FLAG_$(1)) \\\n",
+          "\t\t$(SOURCE) $(LDFLAGS) $(LDLIBS) -o $$@\n",
+          "endef\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "define SNIPER_BINARY_template\n",
+          "$(BIN_DIR)/locks_$(1)_sniper: $(SOURCE) $(HEADERS) | $(BIN_DIR) check-sniper-config\n",
+          "\t$(CC) $(CPPFLAGS) $(CFLAGS) -DSNIPER -D$(LOCK_FLAG_$(1)) \\\n",
+          "\t\t-I$(SNIPER_INCLUDE_DIR) $(SOURCE) $(LDFLAGS) $(HOOKS_LDFLAGS) \\\n",
+          "\t\t$(LDLIBS) -o $$@\n",
+          "endef\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "$(foreach implementation,$(IMPLEMENTATIONS),\\\n",
+          "\t$(eval $(call REAL_BINARY_template,$(implementation))))\n",
+          "$(foreach implementation,$(IMPLEMENTATIONS),\\\n",
+          "\t$(eval $(call SNIPER_BINARY_template,$(implementation))))\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "check-real: real\n",
+          "\t@set -e; \\\n",
+          "\tfor binary in $(REAL_BINARIES); do \\\n",
+          "\t\techo \"CHECK $$binary\"; \\\n",
+          "\t\ttimeout 30s \"$$binary\" \\\n",
+          "\t\t\t$(TEST_THREADS) $(TEST_ITERATIONS) $(TEST_GRAIN); \\\n",
+          "\tdone\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "check-sniper-config:\n",
+          "\t@test -f \"$(SNIPER_INCLUDE_DIR)/sim_api.h\" || { \\\n",
+          "\t\techo \"Missing $(SNIPER_INCLUDE_DIR)/sim_api.h\" >&2; \\\n",
+          "\t\techo \"Set SNIPER_BASE_DIR to the Sniper installation directory.\" >&2; \\\n",
+          "\t\texit 1; \\\n",
+          "\t}\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "# Backwards-compatible one-off build:\n",
+          "#   make locks IMPLFLAG=-DREAL LFLAG=-DTAS_CAS\n",
+          "IMPLFLAG ?= -DSNIPER\n",
+          "LFLAG ?= -DMUTEX\n",
+          "LEGACY_SNIPER_CPPFLAGS := $(if $(findstring -DSNIPER,$(IMPLFLAG)),-I$(SNIPER_INCLUDE_DIR))\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "locks: $(SOURCE) $(HEADERS)\n",
+          "\t$(CC) $(CPPFLAGS) $(CFLAGS) $(IMPLFLAG) $(LFLAG) \\\n",
+          "\t\t$(LEGACY_SNIPER_CPPFLAGS) $(SOURCE) $(LDFLAGS) $(HOOKS_LDFLAGS) \\\n",
+          "\t\t$(LDLIBS) -o $@\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "clean:\n",
+          "\trm -rf $(BIN_DIR) locks\n"
+        ]
+      },
+      {
+        "copy": [
+          2,
+          3
+        ]
+      },
+      {
+        "student_lines": [
+          "help:\n",
+          "\t@echo \"make real          Build all five real-machine binaries\"\n",
+          "\t@echo \"make sniper        Build all five Sniper binaries\"\n",
+          "\t@echo \"make check-real     Build and validate all real-machine binaries\"\n",
+          "\t@echo \"make clean          Remove generated binaries\"\n",
+          "\t@echo\n",
+          "\t@echo \"Sniper example:\"\n",
+          "\t@echo \"  make sniper SNIPER_BASE_DIR=/root/sniper\"\n",
+          "\t@echo\n",
+          "\t@echo \"Validation overrides:\"\n",
+          "\t@echo \"  make check-real TEST_THREADS=8 TEST_ITERATIONS=100000 TEST_GRAIN=1\"\n"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/3rd/advcomparch-ex3-helpcode/lock.h",
+    "base_path": "exercises/3rd/advcomparch-ex3-helpcode/lock.h",
+    "base_source": "CSLab 2025–26 exercise 3 starter package",
+    "base_sha256": "d08e79fb5d6cd16b25d412dd1e17cf3b79e5653688edbdd3e1906c7b110dcf6b",
+    "reconstructed_sha256": "f585399ded42c05a49fe9492989b1abeb88b45448dc93c607bb50fa308c15f5c",
+    "segments": [
+      {
+        "student_lines": [
+          "#ifndef LOCK_H_\n",
+          "#define LOCK_H_\n",
+          "\n",
+          "typedef volatile int spinlock_t;\n",
+          "\n",
+          "#define UNLOCKED  0 \n",
+          "#define LOCKED    1\n",
+          "\n",
+          "static inline void spin_lock_init(spinlock_t *spin_var)\n",
+          "{\n",
+          "    *spin_var = UNLOCKED; \n",
+          "}\n",
+          "\n",
+          "static inline void spin_lock_tas_cas(spinlock_t *spin_var)\n",
+          "{\n",
+          "    while (__sync_val_compare_and_swap(spin_var, UNLOCKED, LOCKED) != UNLOCKED) {\n",
+          "    }\n",
+          "}\n",
+          "\n",
+          "static inline void spin_lock_ttas_cas(spinlock_t *spin_var)\n",
+          "{\n",
+          "    for (;;) {\n",
+          "        while (*spin_var == LOCKED) {\n",
+          "        }\n",
+          "\n",
+          "        if (__sync_val_compare_and_swap(spin_var, UNLOCKED, LOCKED) == UNLOCKED)\n",
+          "            return;\n",
+          "    }\n",
+          "}\n",
+          "\n",
+          "static inline void spin_lock_tas_ts(spinlock_t *spin_var)\n",
+          "{\n",
+          "    while (__sync_lock_test_and_set(spin_var, LOCKED) == LOCKED) {\n",
+          "    }\n",
+          "}\n",
+          "\n",
+          "static inline void spin_lock_ttas_ts(spinlock_t *spin_var)\n",
+          "{\n",
+          "    for (;;) {\n",
+          "        while (*spin_var == LOCKED) {\n",
+          "        }\n",
+          "\n",
+          "        if (__sync_lock_test_and_set(spin_var, LOCKED) == UNLOCKED)\n",
+          "            return;\n",
+          "    }\n",
+          "}\n",
+          "\n",
+          "static inline void spin_unlock(spinlock_t *spin_var)\n",
+          "{\n",
+          "    __sync_lock_release(spin_var);\n",
+          "}\n",
+          "\n",
+          "\n",
+          "#endif\n"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "exercises/3rd/advcomparch-ex3-helpcode/locks_scalability.c",
+    "base_path": "exercises/3rd/advcomparch-ex3-helpcode/locks_scalability.c",
+    "base_source": "CSLab 2025–26 exercise 3 starter package",
+    "base_sha256": "3a5e34c295a10dc4c671d017741fb4acbc78e4c721c374a2dda543ffeb04a980",
+    "reconstructed_sha256": "2bce8f32462bd2c8a49b922cd1653f4d60610138ae5d81cca3ccf2e275bec1e2",
+    "segments": [
+      {
+        "student_lines": [
+          "/**\n",
+          " * Compile flags:\n",
+          " *\n",
+          " * -DTAS_CAS : include TAS lock implementation with __sync_val_compare_and_swap()\n",
+          " * -DTTAS_CAS: include TTAS lock implementation with __sync_val_compare_and_swap()\n",
+          " * -DTAS_TS : include TAS lock implementation with __sync_lock_test_and_set()\n",
+          " * -DTTAS_TS: include TTAS lock implementation with __sync_lock_test_and_set() \n",
+          " * -DMUTEX: include Pthread mutex implementation\n",
+          " *\n",
+          " * -DREAL: compile for real machine\n",
+          " * -DSNIPER: compile for Sniper simulator\n",
+          " *\n",
+          " * -DDEBUG: include debugging information \n",
+          " */\n",
+          "\n",
+          "#define _GNU_SOURCE\n",
+          "\n",
+          "#include <pthread.h>\n",
+          "#include <sched.h>\n",
+          "#include <stdio.h>\n",
+          "#include <stdlib.h>\n",
+          "#include <string.h>\n",
+          "#include <sys/types.h>\n",
+          "\n",
+          "#ifdef REAL\n",
+          "#include <sys/time.h>\n",
+          "#elif defined SNIPER\n",
+          "#include \"sim_api.h\"\n",
+          "#endif\n",
+          "\n",
+          "#if ( defined TAS_CAS || defined TTAS_CAS || defined TAS_TS || defined TTAS_TS ) \n",
+          "#include \"lock.h\"\n",
+          "#endif\n",
+          "\n",
+          "static void* malloc_safe(size_t);\n",
+          "static inline double dummy_work(double);\n",
+          "static int parse_cpu_list(const char *, int *, int);\n",
+          "static int validate_counter(int, unsigned long);\n",
+          "\n",
+          "/* total iterations the critical section is executed by each thread*/\n",
+          "unsigned long iters;  \n",
+          "\n",
+          "/* amount of work performed in the critical section */\n",
+          "unsigned long grain = 1;\n",
+          "\n",
+          "/* synchronization barrier */\n",
+          "pthread_barrier_t bar;\n",
+          "\n",
+          "#ifdef REAL\n",
+          "struct timeval begin, end;\n",
+          "#endif \n",
+          "\n",
+          "double val = 0.0;\n",
+          "int total_threads = 0;\n",
+          "\n",
+          "/* lock/mutex definition */\n",
+          "#if ( defined TAS_CAS || defined TTAS_CAS || defined TAS_TS || defined TTAS_TS ) \n",
+          "spinlock_t lock;\n",
+          "#elif defined MUTEX\n",
+          "pthread_mutex_t mutex;\n",
+          "#endif\n",
+          "\n",
+          "/* thread arguments data structure definition */\n",
+          "typedef struct {\n",
+          "    int my_id; //thread id\n",
+          "    int cpu_id; //logical cpu selected for this thread\n",
+          "} targs_t;\n",
+          "\n",
+          "/* Function to be executed by each thread upon creation */\n",
+          "void* thread_fn(void *args)\n",
+          "{\n",
+          "    int i;\n",
+          "    targs_t *ta = (targs_t*)args;\n",
+          "    cpu_set_t mask;\n",
+          "    pthread_t me;\n",
+          "    int res;\n",
+          "    unsigned long it = 0;\n",
+          "    double in = 1.0, out;\n",
+          "\n",
+          "    me = pthread_self();\n",
+          "\n",
+          "    /* Each thread sets its own affinity. \n",
+          "     * Specifically, thread i (i=0...nthreads-1), sets its \n",
+          "     * affinity to cpu i. \n",
+          "     */\n",
+          "    CPU_ZERO(&mask);\n",
+          "    CPU_SET(ta->cpu_id, &mask);\n",
+          "    res = pthread_setaffinity_np(me, sizeof(cpu_set_t), &mask);\n",
+          "    if (res) {\n",
+          "        fprintf(stderr, \"Error in pthread_setaffinity_np.\\n\");\n",
+          "        exit(EXIT_FAILURE);\n",
+          "    }\n",
+          "\n",
+          "#if DEBUG\n",
+          "    /* Make sure that affinity was set correctly */\n",
+          "    res = pthread_getaffinity_np(me, sizeof(cpu_set_t), &mask);\n",
+          "    if (res) {\n",
+          "        fprintf(stderr, \"Error in pthread_getaffinity_np.\\n\");\n",
+          "        exit(EXIT_FAILURE);\n",
+          "    }\n",
+          "\n",
+          "    pthread_mutex_lock(&mutex);\n",
+          "    fprintf(stderr, \"Thread %d started on cpus \", ta->my_id);\n",
+          "    for ( i = 0; i < CPU_SETSIZE; i++ )\n",
+          "        if (CPU_ISSET(i, &mask))\n",
+          "            fprintf(stderr, \" %d\", i);\n",
+          "    fprintf(stderr, \"\\n\");\n",
+          "    pthread_mutex_unlock(&mutex);\n",
+          "#endif\n",
+          "\n",
+          "    /* Begin of ROI: Thread \"0\" will start measurements at this point */\n",
+          "    pthread_barrier_wait(&bar);\n",
+          "    if (ta->my_id == 0)\n",
+          "#ifdef SNIPER\n",
+          "        SimRoiStart();\n",
+          "#elif defined REAL\n",
+          "        gettimeofday(&begin, NULL);\n",
+          "#endif\n",
+          "    pthread_barrier_wait(&bar);\n",
+          "\n",
+          "\n",
+          "    /* Execute critical section \"iters\" times */\n",
+          "    while (it++ < iters) {\n",
+          "        /* Critical section begin: acquire the lock */\n",
+          "#ifdef MUTEX\n",
+          "        pthread_mutex_lock(&mutex);\n",
+          "#elif defined TAS_CAS\n",
+          "        spin_lock_tas_cas(&lock);\n",
+          "#elif defined TTAS_CAS\n",
+          "        spin_lock_ttas_cas(&lock);\n",
+          "#elif defined TAS_TS\n",
+          "        spin_lock_tas_ts(&lock);\n",
+          "#elif defined TTAS_TS\n",
+          "        spin_lock_ttas_ts(&lock);\n",
+          "#endif\n",
+          "\n",
+          "        /* do some dummy work just to spend time */\n",
+          "        out = dummy_work(in);\n",
+          "        val += out;\n",
+          "\n",
+          "        /* Critical section end: release the lock */\n",
+          "#ifdef MUTEX\n",
+          "        pthread_mutex_unlock(&mutex);\n",
+          "#elif ( defined TAS_CAS || defined TTAS_CAS || defined TAS_TS || defined TTAS_TS ) \n",
+          "        spin_unlock(&lock);\n",
+          "#endif\n",
+          "    }\n",
+          "\n",
+          "    /* End of ROI: Thread \"0\" will stop measurements at this point */\n",
+          "    pthread_barrier_wait(&bar);\n",
+          "    if ( ta->my_id == 0 ) {\n",
+          "#ifdef SNIPER\n",
+          "        if (validate_counter(total_threads, iters) != EXIT_SUCCESS)\n",
+          "            exit(EXIT_FAILURE);\n",
+          "        SimRoiEnd();\n",
+          "#elif defined(REAL)\n",
+          "        gettimeofday(&end, NULL);\n",
+          "#endif\n",
+          "    }\n",
+          "    pthread_barrier_wait(&bar);\n",
+          "\n",
+          "\n",
+          "#if DEBUG\n",
+          "    pthread_mutex_lock(&mutex);\n",
+          "    fprintf(stderr, \"Thread %d stopped with dummy result: %lf\\n\",ta->my_id, out);\n",
+          "    pthread_mutex_unlock(&mutex);\n",
+          "#endif\n",
+          "    \n",
+          "    pthread_exit(NULL);\n",
+          "} \n",
+          "\n",
+          "int main(int argc, char **argv)\n",
+          "{\n",
+          "    targs_t *targs;\n",
+          "    pthread_t *tids;\n",
+          "    int *cpu_ids;\n",
+          "    int i, res, nthreads;\n",
+          "    double elapsed;\n",
+          "    int exit_status = EXIT_SUCCESS;\n",
+          "    const char *cpu_list;\n",
+          "\n",
+          "    if ( argc < 4 ) {\n",
+          "       printf(\"Usage: ./prog <nthreads> <iterations> <grain>\\n\");\n",
+          "       exit(EXIT_FAILURE);\n",
+          "    }\n",
+          "  \n",
+          "    nthreads = atoi(argv[1]);\n",
+          "    iters = atol(argv[2]);\n",
+          "    grain = atol(argv[3]);\n",
+          "    total_threads = nthreads;\n",
+          "\n",
+          "    if (nthreads <= 0 || nthreads > CPU_SETSIZE || iters == 0 || grain == 0) {\n",
+          "        fprintf(stderr,\n",
+          "                \"Invalid arguments: nthreads must be in [1, %d], \"\n",
+          "                \"iterations and grain must be positive.\\n\",\n",
+          "                CPU_SETSIZE);\n",
+          "        exit(EXIT_FAILURE);\n",
+          "    }\n",
+          "\n",
+          "    /* allocate thread structures */\n",
+          "    tids = (pthread_t *)malloc_safe(nthreads * sizeof(pthread_t));\n",
+          "    targs = (targs_t *)malloc_safe(nthreads * sizeof(targs_t)); \n",
+          "    cpu_ids = (int *)malloc_safe(nthreads * sizeof(int));\n",
+          "\n",
+          "    cpu_list = getenv(\"LOCKS_CPU_LIST\");\n",
+          "    if (cpu_list != NULL && cpu_list[0] != '\\0') {\n",
+          "        if (parse_cpu_list(cpu_list, cpu_ids, nthreads) != nthreads) {\n",
+          "            fprintf(stderr,\n",
+          "                    \"LOCKS_CPU_LIST must contain at least %d valid, unique \"\n",
+          "                    \"logical CPU IDs.\\n\",\n",
+          "                    nthreads);\n",
+          "            exit(EXIT_FAILURE);\n",
+          "        }\n",
+          "    } else {\n",
+          "        for (i = 0; i < nthreads; i++)\n",
+          "            cpu_ids[i] = i;\n",
+          "    }\n",
+          "\n",
+          "    /* initialize barrier */\n",
+          "    pthread_barrier_init(&bar, NULL, nthreads);\n",
+          "\n",
+          "    /* initialize lock or mutex */\n",
+          "#if ( defined TAS_CAS || defined TTAS_CAS || defined TAS_TS || defined TTAS_TS ) \n",
+          "    spin_lock_init(&lock);\n",
+          "#elif defined MUTEX\n",
+          "    pthread_mutex_init(&mutex, NULL);\n",
+          "#endif\n",
+          "\n",
+          "    /* create and spawn threads */\n",
+          "    for ( i = 0; i < nthreads; i++ ) {\n",
+          "        targs[i].my_id = i;\n",
+          "        targs[i].cpu_id = cpu_ids[i];\n",
+          "        res = pthread_create(&tids[i], NULL, thread_fn, (void*)&targs[i]);\n",
+          "        if ( res ) {\n",
+          "            fprintf(stderr, \"Error in pthread_create.\\n\");\n",
+          "            exit(EXIT_FAILURE);\n",
+          "        }\n",
+          "    }\n",
+          "\n",
+          "    /* join threads */\n",
+          "    for ( i = 0; i < nthreads; i++ ) {\n",
+          "        pthread_join(tids[i], NULL);\n",
+          "    }\n",
+          "\n",
+          "#ifndef SNIPER\n",
+          "    exit_status = validate_counter(nthreads, iters);\n",
+          "#endif\n",
+          "\n",
+          "#ifdef REAL\n",
+          "    elapsed = (end.tv_sec - begin.tv_sec) + (end.tv_usec - begin.tv_usec)/1000000.0; \n",
+          "    fprintf(stdout, \"Execution time:%lf seconds\\n\", elapsed);\n",
+          "#endif\n",
+          "#ifdef DEBUG\n",
+          "    fprintf(stdout, \"Val:%lf\\n\", val);\n",
+          "#endif\n",
+          "\n",
+          "    pthread_barrier_destroy(&bar);\n",
+          "\n",
+          "    free(tids);\n",
+          "    free(targs);\n",
+          "    free(cpu_ids);\n",
+          "    \n",
+          "    return exit_status;\n",
+          "}\n",
+          "\n",
+          "\n",
+          "static int validate_counter(int nthreads, unsigned long iterations)\n",
+          "{\n",
+          "    double expected_val = (double)nthreads * (double)iterations;\n",
+          "\n",
+          "    if (val != expected_val) {\n",
+          "        fprintf(stderr,\n",
+          "                \"Validation failed: expected val %.0f, observed %.0f\\n\",\n",
+          "                expected_val, val);\n",
+          "        fflush(stderr);\n",
+          "        return EXIT_FAILURE;\n",
+          "    }\n",
+          "\n",
+          "    fprintf(stdout, \"Validation: PASS (val=%.0f)\\n\", val);\n",
+          "    fflush(stdout);\n",
+          "    return EXIT_SUCCESS;\n",
+          "}\n",
+          "\n",
+          "\n",
+          "static int parse_cpu_list(const char *raw, int *cpu_ids, int required)\n",
+          "{\n",
+          "    char *copy, *token, *saveptr;\n",
+          "    int count = 0;\n",
+          "\n",
+          "    copy = strdup(raw);\n",
+          "    if (copy == NULL)\n",
+          "        return -1;\n",
+          "\n",
+          "    token = strtok_r(copy, \",\", &saveptr);\n",
+          "    while (token != NULL && count < required) {\n",
+          "        char *end = NULL;\n",
+          "        long cpu = strtol(token, &end, 10);\n",
+          "        int i;\n",
+          "\n",
+          "        while (end != NULL && *end == ' ')\n",
+          "            end++;\n",
+          "\n",
+          "        if (token[0] == '\\0' || end == token || (end != NULL && *end != '\\0') ||\n",
+          "            cpu < 0 || cpu >= CPU_SETSIZE) {\n",
+          "            free(copy);\n",
+          "            return -1;\n",
+          "        }\n",
+          "\n",
+          "        for (i = 0; i < count; i++) {\n",
+          "            if (cpu_ids[i] == cpu) {\n",
+          "                free(copy);\n",
+          "                return -1;\n",
+          "            }\n",
+          "        }\n",
+          "\n",
+          "        cpu_ids[count++] = (int)cpu;\n",
+          "        token = strtok_r(NULL, \",\", &saveptr);\n",
+          "    }\n",
+          "\n",
+          "    free(copy);\n",
+          "    return count;\n",
+          "}\n",
+          "\n",
+          "\n",
+          "static void* malloc_safe(size_t size)\n",
+          "{\n",
+          "    void *p;\n",
+          "    \n",
+          "    if ( !(p = malloc(size)) ) {\n",
+          "        fprintf(stderr, \"Allocation error\\n\");\n",
+          "        exit(EXIT_FAILURE);\n",
+          "    }\n",
+          "    return p;\n",
+          "}\n",
+          "\n",
+          "\n",
+          "static inline double dummy_work(double x)\n",
+          "{\n",
+          "    int i; \n",
+          "\n",
+          "    for ( i=0; i<grain; i++ ) {\n",
+          "        x = x * 2.0;\n",
+          "        x = x / 2.0;\n",
+          "    }\n",
+          "\n",
+          "    return x;\n",
+          "}\n"
+        ]
+      }
+    ]
+  }
+]

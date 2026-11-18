@@ -1,0 +1,17 @@
+Assignment 1 - Section 5.7 Ref-Input Validation
+Parsed benchmark outputs: 11
+Missing/unparseable benchmark outputs: 0
+
+Selected predictors
+Predictor                Family           Bits  Ref Mean MPKI  Ref Agg MPKI  Ref Mean Acc%
+--------------------------------------------------------------------------------------------
+Perceptron-M141-N32      perceptron      32571       2.634003      1.139411      97.875823
+Alpha21264               alpha21264      29696       2.674519      1.128631      97.944800
+Perceptron-M56-N72       perceptron      32704       2.777677      1.110280      97.805619
+
+Train vs ref by predictor
+Predictor                  Train Mean     Ref Mean        Delta    Train Agg      Ref Agg        Delta
+----------------------------------------------------------------------------------------------------
+Perceptron-M141-N32          3.088004     2.634003    -0.454001     2.186112     1.139411    -1.046701
+Alpha21264                   3.071448     2.674519    -0.396929     2.118810     1.128631    -0.990179
+Perceptron-M56-N72           3.139574     2.777677    -0.361897     1.787796     1.110280    -0.677516
